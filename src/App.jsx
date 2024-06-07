@@ -19,7 +19,12 @@ function App() {
     <div className="w-full h-screen bg-zinc-800 relative ">
       <Navbar />
       <BackgroundText />
-      <div className=" fixed top-0 left-0 w-full h-full z-[3]"></div>
+      <div className=" fixed top-0 left-0 w-full h-full z-[3]">
+        {data.map((card, index) => (
+          <DocCard key={index} data={card} />
+        ))}
+        {/* <DocCard /> */}
+      </div>
     </div>
   );
 }
