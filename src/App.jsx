@@ -19,9 +19,7 @@ function App() {
     <div className="w-full h-screen bg-zinc-800 relative ">
       <Navbar />
       <BackgroundText />
-      <div className=" fixed top-0 left-0 w-full h-full z-[3]">
-        {/* <DocCard /> */}
-      </div>
+      <div className=" fixed top-0 left-0 w-full h-full z-[3]"></div>
     </div>
   );
 }
