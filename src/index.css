@@ -12,3 +12,20 @@
 ::selection {
   color: #26ae64;
 }
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #4a5568; /* Tailwind gray-700 */
+  border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: #27272a; /* Tailwind gray-800 */
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #27272a; /* Tailwind gray-900 */
+}
