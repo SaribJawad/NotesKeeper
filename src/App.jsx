@@ -28,7 +28,7 @@ function App() {
 
   const data = [
     {
-      desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam excepturi iure in ipsam?",
+      desc: "lorem Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam excepturi iure in lorem Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam excepturi iure inlorem Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam excepturi iure inlorem Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam excepturi iure inlorem Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam excepturi iure inipsam?",
       filesize: ".9mbs",
       tag: {
         isOpen: false,

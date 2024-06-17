@@ -3,6 +3,7 @@ import { auth } from "../firebase/firebase";
 /* eslint-disable react/prop-types */
 function Navbar({ currentUser, setCurrentUser }) {
   // signing out user function
+
   function signOut() {
     auth
       .signOut()
@@ -14,11 +15,13 @@ function Navbar({ currentUser, setCurrentUser }) {
       });
   }
 
+  console.log(currentUser?.photoURL);
+
   return (
     <nav
       className={`absolute w-full py-10 px-16 flex items-center ${
         currentUser ? "justify-between" : "justify-center"
-      } text-zinc-500 text-md font-semibold`}
+      } text-zinc-500 text-md font-semibold z-30`}
     >
       {currentUser && (
         <div>
@@ -32,7 +35,7 @@ function Navbar({ currentUser, setCurrentUser }) {
       )}
       NotesKeeper.
       {currentUser && (
-        <button onClick={signOut} className="btn btn-sm">
+        <button onClick={signOut} className="btn btn-sm ">
           signout
         </button>
       )}
