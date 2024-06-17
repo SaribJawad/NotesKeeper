@@ -10,8 +10,8 @@ function DocCard({ data, reference }) {
       initial={{ opacity: 0, scale: 0.5 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{
-        duration: 0.8,
-        delay: 0.4,
+        duration: 0.6,
+        delay: 0.1,
         ease: [0, 0.71, 0.2, 1.01],
       }}
       drag
@@ -24,7 +24,7 @@ function DocCard({ data, reference }) {
         {data.desc}
       </p>
       <div className="footer absolute bottom-0  w-full h-12 py-3 left-0 mb-3">
-        <div className="flex items-center justify-between  px-8 ">
+        <div className="flex items-center justify-between w-full px-8 ">
           <h5>{data.filesize}</h5>
           <span className="w-7 h-7 bg-[#ee3232] rounded-full flex  items-center justify-center cursor-pointer">
             {/* <LuDownload size=".8em" color="#fff" /> */}

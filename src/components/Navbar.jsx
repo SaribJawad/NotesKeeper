@@ -18,7 +18,7 @@ function Navbar({ currentUser, setCurrentUser }) {
     <nav
       className={`absolute w-full py-10 px-16 flex items-center ${
         currentUser ? "justify-between" : "justify-center"
-      } text-[#26ae64] text-md font-semibold`}
+      } text-zinc-500 text-md font-semibold`}
     >
       {currentUser && (
         <div>

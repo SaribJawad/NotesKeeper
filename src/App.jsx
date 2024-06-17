@@ -6,6 +6,7 @@ import DocCard from "./components/DocCard";
 import { Route, Routes } from "react-router-dom";
 import Login from "./pages/Login";
 import { auth } from "./firebase/firebase";
+import Footer from "./components/Footer";
 
 function App() {
   const ref = useRef(null);
@@ -76,6 +77,7 @@ function App() {
                 ))}
                 {/* <DocCard /> */}
               </div>
+              <Footer />
             </HomePage>
           }
         />
