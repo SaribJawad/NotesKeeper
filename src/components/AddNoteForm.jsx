@@ -1,6 +1,28 @@
-function AddNoteForm({ setIsOpenModal }) {
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import { db } from "../firebase/firebase";
+import { useState } from "react";
+
+function AddNoteForm({ setIsOpenModal, currentUser }) {
+  const [noteInput, setNoteInput] = useState("");
+
+  console.log(noteInput);
+  // Adding notes to firestore
+  async function addingNotes() {
+    try {
+      await addDoc(collection(db, "notes"), {
+        userId: currentUser?.uid,
+        note: noteInput,
+        createdAt: serverTimestamp(),
+      });
+      setIsOpenModal(false);
+      setNoteInput("");
+    } catch (e) {
+      console.log("Error adding document:", e);
+    }
+  }
+
   return (
-    <div className="p-4">
+    <div className="px-10 py-8">
       <button
         onClick={() => setIsOpenModal((show) => !show)}
         className="btn btn-circle btn-sm absolute left-[90%] bg-transparent border-none "
@@ -20,14 +42,19 @@ function AddNoteForm({ setIsOpenModal }) {
           />
         </svg>
       </button>
-      <div className="h-[400px] w-[500px] flex items-center justify-center flex-col gap-10 rounded-lg">
+      <div className="h-[400px] w-[500px] flex items-center justify-center flex-col gap-8 rounded-lg">
         <textarea
-          className="textarea textarea-bordered text-[#FFFFFF] bg-[#19191C] outline-none h-56 w-[80%] border-none placeholder:text-[#a3a3a3]
+          value={noteInput}
+          className="textarea textarea-bordered text-[#FFFFFF] bg-[#19191C] outline-none h-52 w-[80%] border-none placeholder:text-[#a3a3a3]
           "
           placeholder="Write your notes here."
+          onChange={(e) => setNoteInput(e.target.value)}
         ></textarea>
-        <button className="btn btn-sm bg-[#26AE64] text-[#19191C] hover:bg-[#26AE64] hover:text-[#19191C] ">
-          Add
+        <button
+          onClick={addingNotes}
+          className="btn  bg-[#26AE64] text-[#19191C] hover:bg-[#26AE64] hover:text-[#19191C] "
+        >
+          Add Note
         </button>
       </div>
     </div>

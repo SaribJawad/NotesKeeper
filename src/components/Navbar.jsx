@@ -15,8 +15,6 @@ function Navbar({ currentUser, setCurrentUser }) {
       });
   }
 
-  console.log(currentUser?.photoURL);
-
   return (
     <nav
       className={`absolute w-full py-10 px-16 flex items-center ${
@@ -25,17 +23,18 @@ function Navbar({ currentUser, setCurrentUser }) {
     >
       {currentUser && (
         <div>
-          <img
+          {/* <img
             width={35}
             className="rounded-full"
             src={currentUser?.photoURL}
             alt=""
-          />
+          /> */}
+          <span>{currentUser?.displayName}</span>
         </div>
       )}
       NotesKeeper.
       {currentUser && (
-        <button onClick={signOut} className="btn btn-sm ">
+        <button onClick={signOut} className="btn btn-sm  bg-[#19191C]">
           signout
         </button>
       )}
