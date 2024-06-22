@@ -11,17 +11,18 @@ function DocCard({ data, reference }) {
       animate={{ opacity: 1, scale: 1 }}
       transition={{
         duration: 0.6,
-        delay: 0.1,
+        delay: 0,
         ease: [0, 0.71, 0.2, 1.01],
       }}
       drag
+      dragElastic={0.1}
       dragConstraints={reference}
       whileDrag={{ scale: 1.1 }}
       className=" relative w-60 h-72 rounded-[50px] bg-zinc-900/90 text-white py-8 px-6 overflow-hidden"
     >
       <FaRegFileAlt />
       <p className="text-sm h-40 mt-5 font-medium leading-tight overflow-y-auto  custom-scrollbar">
-        {data.desc}
+        {data.note}
       </p>
       <div className="footer absolute bottom-0  w-full h-12 py-3 left-0 mb-3">
         <div className="flex items-center justify-between w-full px-8 ">

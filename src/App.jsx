@@ -40,39 +40,9 @@ function App() {
     });
 
     return;
-  }, []);
+  }, [notes]);
 
   console.log(notes);
-
-  const data = [
-    {
-      desc: "lorem Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam excepturi iure in lorem Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam excepturi iure inlorem Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam excepturi iure inlorem Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam excepturi iure inlorem Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam excepturi iure inipsam?",
-      filesize: ".9mbs",
-      tag: {
-        isOpen: false,
-        tagTitle: "Download Now",
-        tagColor: "green",
-      },
-    },
-    {
-      desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam excepturi iure in ipsam?",
-      filesize: ".9mbs",
-      tag: {
-        isOpen: false,
-        tagTitle: "Download Now",
-        tagColor: "green",
-      },
-    },
-    {
-      desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam excepturi iure in ipsam?",
-      filesize: ".9mbs",
-      tag: {
-        isOpen: false,
-        tagTitle: "Download Now",
-        tagColor: "green",
-      },
-    },
-  ];
 
   return (
     <div
@@ -87,7 +57,7 @@ function App() {
             <HomePage>
               <BackgroundText />
               <div className=" fixed top-0 left-0 w-full h-full z-[3] flex gap-5 justify-center flex-wrap p-24  overflow-y-auto overflow-x-hidden  .custom-scrollbar">
-                {data.map((card, index) => (
+                {notes.map((card, index) => (
                   <DocCard key={index} data={card} reference={ref} />
                 ))}
                 {/* <DocCard /> */}
