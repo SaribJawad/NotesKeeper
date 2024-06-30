@@ -1,25 +1,12 @@
 /* eslint-disable react/prop-types */
 import { FaRegFileAlt } from "react-icons/fa";
 // import { LuDownload } from "react-icons/lu";
-import { motion } from "framer-motion";
+import {} from "framer-motion";
 import { MdOutlineDeleteOutline } from "react-icons/md";
 
-function DocCard({ data, reference }) {
+function DocCard({ data }) {
   return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.5 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{
-        duration: 0.6,
-        delay: 0,
-        ease: [0, 0.71, 0.2, 1.01],
-      }}
-      drag
-      dragElastic={0.1}
-      dragConstraints={reference}
-      whileDrag={{ scale: 1.1 }}
-      className=" relative w-60 h-72 rounded-[50px] bg-zinc-900/90 text-white py-8 px-6 overflow-hidden"
-    >
+    <div className=" relative w-60 h-72 rounded-[50px] bg-zinc-900/90 text-white py-8 px-6 overflow-hidden">
       <FaRegFileAlt />
       <p className="text-sm h-40 mt-5 font-medium leading-tight overflow-y-auto  custom-scrollbar">
         {data.note}
@@ -33,7 +20,7 @@ function DocCard({ data, reference }) {
           </span>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 }
 

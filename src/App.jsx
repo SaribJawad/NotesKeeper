@@ -23,26 +23,26 @@ function App() {
     const q = query(collection(db, "notes"), orderBy("createdAt"));
     const querySnapshot = await getDocs(q);
     const notesArray = querySnapshot.docs.map((doc) => ({
-      ...doc.data(),
+    ...doc.data(),
     }));
 
     setNotes(notesArray);
   }
+  console.log(notes);
 
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
       if (user) {
         setCurrentUser(user);
         gettingNotes();
+        console.log("asd");
       } else {
         setCurrentUser(null);
       }
     });
 
     return;
-  }, [notes]);
-
-  console.log(notes);
+  }, []);
 
   return (
     <div
@@ -73,6 +73,7 @@ function App() {
                   {isOpenModal && (
                     <Modal>
                       <AddNoteForm
+                        gettingNotes={gettingNotes}
                         setIsOpenModal={setIsOpenModal}
                         currentUser={currentUser}
                       />

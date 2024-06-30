@@ -2,7 +2,7 @@ import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { db } from "../firebase/firebase";
 import { useState } from "react";
 
-function AddNoteForm({ setIsOpenModal, currentUser }) {
+function AddNoteForm({ setIsOpenModal, currentUser, gettingNotes }) {
   const [noteInput, setNoteInput] = useState("");
 
   console.log(noteInput);
@@ -16,6 +16,7 @@ function AddNoteForm({ setIsOpenModal, currentUser }) {
       });
       setIsOpenModal(false);
       setNoteInput("");
+      gettingNotes();
     } catch (e) {
       console.log("Error adding document:", e);
     }
