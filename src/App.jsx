@@ -10,6 +10,7 @@ import Footer from "./components/Footer";
 import Modal from "./components/Modal";
 import AddNoteForm from "./components/AddNoteForm";
 import { collection, getDocs, orderBy, query } from "firebase/firestore";
+import { AnimatePresence } from "framer-motion";
 
 function App() {
   const ref = useRef(null);
@@ -22,20 +23,24 @@ function App() {
   async function gettingNotes() {
     const q = query(collection(db, "notes"), orderBy("createdAt"));
     const querySnapshot = await getDocs(q);
+
     const notesArray = querySnapshot.docs.map((doc) => ({
-    ...doc.data(),
+      id: doc.id,
+      ...doc.data(),
     }));
 
     setNotes(notesArray);
   }
-  console.log(notes);
+
+  const removeNote = (id) => {
+    setNotes((prevNotes) => prevNotes.filter((note) => note.id !== id));
+  };
 
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
       if (user) {
         setCurrentUser(user);
         gettingNotes();
-        console.log("asd");
       } else {
         setCurrentUser(null);
       }
@@ -43,6 +48,8 @@ function App() {
 
     return;
   }, []);
+
+  console.log(notes);
 
   return (
     <div
@@ -57,10 +64,16 @@ function App() {
             <HomePage>
               <BackgroundText />
               <div className=" fixed top-0 left-0 w-full h-full z-[3] flex gap-5 justify-center flex-wrap p-24  overflow-y-auto overflow-x-hidden  .custom-scrollbar">
-                {notes.map((card, index) => (
-                  <DocCard key={index} data={card} reference={ref} />
+                {notes.map((card) => (
+                  <DocCard
+                    key={card.id}
+                    data={card}
+                    reference={ref}
+                    docId={card.id}
+                    removeNote={removeNote}
+                    gettingNotes={gettingNotes}
+                  />
                 ))}
-                {/* <DocCard /> */}
               </div>
               <Footer>
                 <div className="w-full z-50  fixed top-[90%] flex justify-center">
@@ -70,15 +83,17 @@ function App() {
                   >
                     Create a note
                   </button>
-                  {isOpenModal && (
-                    <Modal>
-                      <AddNoteForm
-                        gettingNotes={gettingNotes}
-                        setIsOpenModal={setIsOpenModal}
-                        currentUser={currentUser}
-                      />
-                    </Modal>
-                  )}
+                  <AnimatePresence>
+                    {isOpenModal && (
+                      <Modal>
+                        <AddNoteForm
+                          gettingNotes={gettingNotes}
+                          setIsOpenModal={setIsOpenModal}
+                          currentUser={currentUser}
+                        />
+                      </Modal>
+                    )}
+                  </AnimatePresence>
                 </div>
               </Footer>
             </HomePage>

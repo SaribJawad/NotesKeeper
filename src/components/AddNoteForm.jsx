@@ -5,7 +5,6 @@ import { useState } from "react";
 function AddNoteForm({ setIsOpenModal, currentUser, gettingNotes }) {
   const [noteInput, setNoteInput] = useState("");
 
-  console.log(noteInput);
   // Adding notes to firestore
   async function addingNotes() {
     try {
