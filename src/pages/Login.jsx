@@ -2,9 +2,15 @@ import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 
 import { motion } from "framer-motion";
 import { auth } from "../firebase/firebase";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const googleProvider = new GoogleAuthProvider();
+
+  const navigate = useNavigate();
+
+  const [currentUser, setCurrentUser] = useState(null);
 
   // Sigining in new user
   const signInWithGoogle = async () => {
@@ -14,6 +20,20 @@ function Login() {
       console.log(`${errorMessage}/${errorCode}`);
     });
   };
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        setCurrentUser(user);
+        navigate("/");
+      } else {
+        setCurrentUser(null);
+      }
+    });
+
+    // Cleanup the subscription on unmount
+    return () => unsubscribe();
+  }, [navigate]);
 
   return (
     <div

@@ -6,6 +6,7 @@ import { MdOutlineDeleteOutline } from "react-icons/md";
 import { deleteDoc, doc } from "firebase/firestore";
 import { db } from "../firebase/firebase";
 import { useState } from "react";
+import { formatDistanceToNow } from "date-fns";
 
 function DocCard({ data, docId, gettingNotes, removeNote }) {
   const [isVisible, setIsVisible] = useState(true);
@@ -24,6 +25,9 @@ function DocCard({ data, docId, gettingNotes, removeNote }) {
     }
   }
 
+  const createdAt = data.createdAt.seconds * 1000;
+  const timeAgo = formatDistanceToNow(new Date(createdAt), { addSuffix: true });
+
   return (
     <AnimatePresence>
       {isVisible && (
@@ -39,12 +43,13 @@ function DocCard({ data, docId, gettingNotes, removeNote }) {
           className=" relative w-60 h-72 rounded-[50px] bg-zinc-900/90 text-white py-8 px-6 overflow-hidden"
         >
           <FaRegFileAlt />
-          <p className="text-sm h-40 mt-5 font-medium leading-tight overflow-y-auto  custom-scrollbar">
+          <p className="text-sm h-40 mt-5 font-medium leading-tight overflow-y-auto  custom-scrollbar capitalize">
             {data.note}
           </p>
           <div className="footer absolute bottom-0  w-full h-12 py-3 left-0 mb-3">
             <div className="flex items-center justify-between w-full px-8 ">
-              <h5>{data.filesize}</h5>
+              <h5 className="text-xs text-gray-400 capitalize">{timeAgo}</h5>
+
               <span
                 onClick={deleteNotes}
                 className="w-7 h-7 bg-[#ee3232] rounded-full flex  items-center justify-center cursor-pointer"
