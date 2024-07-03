@@ -15,21 +15,28 @@ import { AnimatePresence } from "framer-motion";
 function App() {
   const ref = useRef(null);
   const [currentUser, setCurrentUser] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [notes, setNotes] = useState([]);
 
   // Getting notes from firestore
 
   async function gettingNotes() {
-    const q = query(collection(db, "notes"), orderBy("createdAt"));
-    const querySnapshot = await getDocs(q);
+    setIsLoading(true);
+    try {
+      const q = query(collection(db, "notes"), orderBy("createdAt"));
+      const querySnapshot = await getDocs(q);
 
-    const notesArray = querySnapshot.docs.map((doc) => ({
-      id: doc.id,
-      ...doc.data(),
-    }));
+      const notesArray = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
 
-    setNotes(notesArray);
+      setNotes(notesArray);
+      setIsLoading(false);
+    } catch (e) {
+      console.log("error while fetching data -" + e);
+    }
   }
 
   const removeNote = (id) => {
@@ -64,16 +71,20 @@ function App() {
             <HomePage>
               <BackgroundText />
               <div className=" fixed top-0 left-0 w-full h-full z-[3] flex gap-5 justify-center flex-wrap p-24  overflow-y-auto overflow-x-hidden  .custom-scrollbar">
-                {notes.map((card) => (
-                  <DocCard
-                    key={card.id}
-                    data={card}
-                    reference={ref}
-                    docId={card.id}
-                    removeNote={removeNote}
-                    gettingNotes={gettingNotes}
-                  />
-                ))}
+                {isLoading ? (
+                  <span className="loading loading-spinner loading-lg absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]"></span>
+                ) : (
+                  notes.map((card) => (
+                    <DocCard
+                      key={card.id}
+                      data={card}
+                      reference={ref}
+                      docId={card.id}
+                      removeNote={removeNote}
+                      gettingNotes={gettingNotes}
+                    />
+                  ))
+                )}
               </div>
               <Footer>
                 <div className="w-full z-50  fixed top-[90%] flex justify-center">
