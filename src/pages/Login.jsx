@@ -41,18 +41,7 @@ function Login() {
     "
     >
       <div className="flex items-center justify-center flex-col gap-10">
-        <motion.h1
-          initial={{ opacity: 0, scale: 0.5 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{
-            duration: 0.7,
-            delay: 0.4,
-            ease: [0, 0.71, 0.2, 1.01],
-          }}
-          className="text-3xl"
-        >
-          Login with google to get started.
-        </motion.h1>
+        <h1 className="text-3xl">Login with google to get started.</h1>
 
         <motion.button
           onClick={signInWithGoogle}
