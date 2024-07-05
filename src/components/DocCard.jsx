@@ -54,7 +54,6 @@ function DocCard({ data, docId, gettingNotes, removeNote }) {
                 onClick={deleteNotes}
                 className="w-7 h-7 bg-[#ee3232] rounded-full flex  items-center justify-center cursor-pointer"
               >
-                {/* <LuDownload size=".8em" color="#fff" /> */}
                 <MdOutlineDeleteOutline size="1em" color="#fff" />
               </span>
             </div>
