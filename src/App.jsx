@@ -19,7 +19,6 @@ function App() {
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [notes, setNotes] = useState([]);
 
-  console.log(notes);
   // Getting notes from firestore
 
   async function gettingNotes() {
@@ -44,6 +43,8 @@ function App() {
     setNotes((prevNotes) => prevNotes.filter((note) => note.id !== id));
   };
 
+  console.log(notes);
+
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
       if (user) {
@@ -53,8 +54,6 @@ function App() {
         setCurrentUser(null);
       }
     });
-
-    return;
   }, []);
 
   return (
